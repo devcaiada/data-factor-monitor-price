@@ -147,4 +147,108 @@ Sinta-se à vontade para contribuir! Sugestões, melhorias e feedbacks são bem-
 📩 Para dúvidas ou sugestões, [entre em contato](https://www.linkedin.com/in/devcaiada)!
 
 > 🚀 **Vamos juntos monitorar e otimizar nosso uso no Azure!** 💙
+----
+<br></br>
+<br></br>
+
+# 🛠 Redundância de Arquivos no Azure com Data Factory
+
+## ✨ Visão Geral
+
+Este projeto tem como objetivo criar um **processo completo de redundância de arquivos** utilizando recursos do **Microsoft Azure**. Através do **Azure Data Factory**, você aprenderá a configurar toda a infraestrutura necessária para mover dados entre ambientes **on-premises** e a **nuvem**, garantindo backup seguro e acessível.
+
+## 🔄 Fluxo do Processo
+1. **Conectar fontes de dados**: SQL Server local e Azure SQL Database.
+2. **Criar Linked Services**: Estabelecendo conexão entre o Data Factory e os repositórios de dados.
+3. **Criar Datasets**: Definição das estruturas para entrada e saída dos dados.
+4. **Criar Pipelines**: Construção dos fluxos de trabalho para movimentação dos dados.
+5. **Converter e armazenar**: Transformar dados em **arquivos .TXT**, organizando-os em camadas (**raw/bronze**) dentro do **Azure Data Lake**.
+6. **Publicar e Executar**: Validação e execução do pipeline.
+7. **Analisar performance**: Aplicando boas práticas para otimizar o processo.
+
+---
+## 🛠️ Tecnologias Utilizadas
+
+- **Microsoft Azure** (🌍 Plataforma Cloud)
+- **Azure Data Factory** (🛠 Orquestração de Dados)
+- **SQL Server (On-Premises e Azure SQL Database)** (💾 Banco de Dados Relacional)
+- **Azure Blob Storage** (🏢 Armazenamento de Arquivos)
+- **Integration Runtime** (⚡ Conectividade Híbrida)
+
+---
+## 🗒️ Passo a Passo da Implementação
+
+### 1. Criando o Azure Data Factory
+1. Acesse o portal do **Azure**.
+2. Crie um novo **Data Factory**.
+3. Configure o **Integration Runtime** para conectar-se ao SQL Server local.
+
+### 2. Configurando os Linked Services
+- Adicione um **Linked Service** para o SQL Server On-Premises.
+- Adicione um **Linked Service** para o Azure SQL Database.
+- Adicione um **Linked Service** para o Blob Storage.
+
+### 3. Criando os Datasets
+- Crie um **Dataset** apontando para a tabela SQL de origem.
+- Crie um **Dataset** para os arquivos **.TXT** de destino no Blob Storage.
+
+### 4. Criando o Pipeline
+- Adicione um **Copy Activity** para mover os dados do SQL Server para o Azure Data Lake.
+- Configure a transformação dos dados em **arquivos .TXT** organizados por camadas (**raw/bronze**).
+- Teste e valide as transferências.
+
+### 5. Publicando e Executando
+- Publique as alterações e execute o pipeline.
+- Monitore os logs e valide a performance.
+
+---
+## 💡 Utilizando o SDK do Azure no Python
+O **SDK do Azure para Python** permite interagir programaticamente com os serviços da nuvem, como o **Azure Blob Storage**. Com ele, você pode realizar operações como upload, download e gerenciamento de arquivos de forma eficiente.
+
+Para instalar:
+```bash
+pip install azure-storage-blob
+```
+
+### Exemplo de código para upload de arquivo no Azure Blob Storage
+```python
+from azure.storage.blob import BlobServiceClient
+
+# Configuração
+connect_str = "<SUA_CONNECTION_STRING>"
+container_name = "meu-container"
+blob_name = "meu-arquivo.txt"
+file_path = "./meu-arquivo.txt"
+
+# Criar o cliente do serviço Blob
+blob_service_client = BlobServiceClient.from_connection_string(connect_str)
+blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
+
+# Upload do arquivo
+with open(file_path, "rb") as data:
+    blob_client.upload_blob(data)
+
+print(f"Arquivo {blob_name} enviado com sucesso!")
+```
+
+Confira a [documentação oficial](https://learn.microsoft.com/en-us/azure/storage/blobs/) para mais detalhes sobre suas funcionalidades.
+
+---
+## 🌟 Benefícios
+- 🌐 **Alta disponibilidade**: Backup automático na nuvem.
+- ⚖️ **Segurança**: Dados armazenados de forma redundante.
+- ⏳ **Eficiência**: Pipelines otimizados para melhor desempenho.
+
+---
+## 💼 Contribuição
+Fique à vontade para **sugerir melhorias** ou abrir um **Pull Request**! Qualquer dúvida, me chamem! 🚀
+
+---
+## 📅 Licença
+Este projeto está sob a **Unlicense**, permitindo seu uso e modificação sem restrições.
+
+---
+👉 **Vamos juntos dominar o Azure!** 🌟
+
+
 
