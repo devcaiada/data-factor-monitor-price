@@ -250,5 +250,142 @@ Este projeto está sob a **Unlicense**, permitindo seu uso e modificação sem r
 ---
 👉 **Vamos juntos dominar o Azure!** 🌟
 
+-----
+
+<br></br>
+<br></br>
+
+# Azure Databricks - Versionamento e Organização de Notebooks
+
+## Descrição
+Este projeto demonstra como utilizar o **Azure Databricks** para versionamento e organização de notebooks em ambientes de dados. A proposta inclui:
+
+- Criação e configuração de **clusters**;
+- Importação e execução de **notebooks** com suporte de **Inteligência Artificial**;
+- Integração com **Azure DevOps** para controle de código e automação de pipelines de **CI/CD**;
+- Uso da IA integrada ao Databricks para geração de código **Python e Spark**;
+- Boas práticas para organização, exportação e reaproveitamento de notebooks;
+- Exploração de recursos do **Microsoft Learn**, com exercícios guiados e roteiros de aprendizado;
+- Trabalho colaborativo e seguro com versionamento estruturado em **engenharia de dados e machine learning**.
+
+---
+## Arquitetura
+
+A arquitetura deste projeto segue o fluxo abaixo:
+
+1. **Criação de um Cluster** no Azure Databricks.
+2. **Importação de arquivos e notebooks** para execução.
+3. **Execução de notebooks interativos** com filtros, sumarizações e visualizações.
+4. **Geração de código com suporte de IA** integrada ao Databricks.
+5. **Integração com Azure DevOps** para versionamento e CI/CD.
+6. **Automação de pipelines** para controle das execuções e governança.
+
+![Arquitetura Azure Databricks](https://www.databricks.com/sites/default/files/2023-03/azure-azure-databricks-img.png?v=1678449355)
+
+---
+## Tecnologias Utilizadas
+
+- **Azure Databricks**
+- **Python**
+- **Apache Spark**
+- **Azure DevOps**
+- **Microsoft Learn**
+- **CI/CD (Continuous Integration & Continuous Deployment)**
+- **MLflow (para versionamento de modelos em ML)**
+
+---
+## Passo a Passo - Configuração do Ambiente
+
+### 1. Criar um Cluster no Databricks
+1. Acesse [Azure Databricks](https://portal.azure.com/)
+2. Navegue até `Clusters > Create Cluster`
+3. Escolha um nome e selecione a configuração de hardware necessária
+4. Clique em `Create Cluster`
+
+### 2. Importar e Executar um Notebook
+1. No Databricks, acesse `Workspace`
+2. Clique em `Import` e carregue um arquivo `.ipynb` ou `.dbc`
+3. Abra o notebook para edição e execução
+
+### 3. Configurar Azure DevOps para Versionamento
+1. No Azure DevOps, crie um repositório `Git`
+2. Conecte o Databricks ao Azure DevOps: 
+   - Vá para `Repos > Git Integration`
+   - Configure a conexão ao seu repositório remoto
+3. Habilite `CI/CD Pipelines` para automação
+
+### 4. Criar um Pipeline CI/CD no Azure DevOps
+1. No Azure DevOps, vá para `Pipelines > New Pipeline`
+2. Escolha `GitHub` ou `Azure Repos Git` como origem do código
+3. Selecione `Starter Pipeline` e edite o `azure-pipelines.yml`
+4. Adicione o seguinte código para execução automatizada de notebooks:
+
+```yaml
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: DatabricksRunNotebook@0
+  inputs:
+    databricksServiceConnection: 'AzureDatabricks'
+    notebookPath: '/Workspace/MeuNotebook'
+    workspaceUrl: 'https://adb-123456789.azuredatabricks.net'
+    newCluster:
+      clusterName: 'ci-cd-cluster'
+      nodeTypeId: 'Standard_DS3_v2'
+      sparkVersion: '7.3.x-scala2.12'
+```
+
+5. Salve e execute o pipeline para testar a automação
+
+---
+## Exemplo de Código em Python e Spark
+
+Abaixo, um exemplo de código para leitura, transformação e exibição de dados em um notebook do Databricks:
+
+```python
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, sum
+
+# Criar sessão Spark
+spark = SparkSession.builder.appName("DatabricksExample").getOrCreate()
+
+# Carregar dataset (exemplo fictício)
+data = [("Produto A", 1000), ("Produto B", 1500), ("Produto C", 700)]
+df = spark.createDataFrame(data, ["Produto", "Vendas"])
+
+# Transformação: sumarizar vendas
+df_sum = df.groupBy("Produto").agg(sum(col("Vendas")).alias("Total_Vendas"))
+
+# Exibir resultado
+df_sum.show()
+```
+
+---
+## Benefícios do Projeto
+
+✅ **Melhor organização e versionamento de notebooks**
+✅ **Automação de processos com CI/CD**
+✅ **Colaboração eficiente em times de engenharia e ciência de dados**
+✅ **Uso de Inteligência Artificial para facilitar o desenvolvimento**
+✅ **Governança e segurança no controle de código**
+
+---
+## Recursos Extras
+
+- [Documentação Oficial do Azure Databricks](https://learn.microsoft.com/en-us/azure/databricks/)
+- [Introdução ao Apache Spark](https://spark.apache.org/)
+- [Configuração de Repositórios no Databricks](https://learn.microsoft.com/en-us/azure/databricks/repos/)
+- [GitHub Actions para Azure Databricks](https://github.com/marketplace/actions/databricks-run-notebook)
+
+---
+## Contribuições
+
+Fique à vontade para contribuir! Caso tenha sugestões, **abra uma issue ou envie um pull request**. 🚀
 
 
