@@ -388,4 +388,76 @@ df_sum.show()
 
 Fique à vontade para contribuir! Caso tenha sugestões, **abra uma issue ou envie um pull request**. 🚀
 
+<br></br>
+<br></br>
 
+# Integrando o Azure Data Factory ao Azure DevOps
+
+## Visão Geral
+Este projeto demonstra como integrar o **Azure Data Factory** ao **Azure DevOps**, permitindo **versionamento**, **controle de mudanças** e **backups automáticos** de pipelines e artefatos de dados. Essa integração assegura maior **governança** e **rastreabilidade** no desenvolvimento de soluções de dados.
+
+## Benefícios da Integração
+- **Versionamento de Pipelines**: Manutenção de histórico de alterações.
+- **Controle de Mudanças**: Padronização e rastreamento de ajustes.
+- **Backup Automático**: Segurança contra perda de artefatos.
+- **Preparação para CI/CD**: Facilidade na automação de deploys futuros.
+
+## Passo a Passo da Integração
+
+### 1. Criar uma Organização e um Projeto no Azure DevOps
+1. Acesse o [Azure DevOps](https://dev.azure.com/).
+2. Clique em **Criar nova organização** (caso não tenha uma).
+3. Dentro da organização, clique em **Novo projeto**.
+4. Defina um nome para o projeto e escolha a visibilidade (*Privado* ou *Público*).
+5. Clique em **Criar**.
+
+### 2. Configurar o Repositório Git
+1. No projeto criado, vá para **Repositórios**.
+2. Escolha **Git** como tipo de repositório.
+3. Copie a URL do repositório remoto para uso posterior.
+
+### 3. Criar o Azure Data Factory
+1. Acesse o [Portal do Azure](https://portal.azure.com/).
+2. Vá até **Data Factory** e clique em **Criar**.
+3. Preencha as informações do recurso (Nome, Região, Grupo de Recursos).
+4. Em **Git Configuration**, selecione **Configure Git later** se quiser configurar posteriormente.
+5. Clique em **Criar**.
+
+### 4. Configurar a Integração com o Git
+1. Acesse o **Azure Data Factory Studio**.
+2. No canto superior direito, clique em **Manage**.
+3. Vá para a aba **Git Configuration**.
+4. Clique em **Configure** e insira:
+   - **Provider**: Azure DevOps Git
+   - **Account Name**: Nome da organização no DevOps
+   - **Project Name**: Nome do projeto criado
+   - **Repository Name**: Nome do repositório
+   - **Branch**: Defina a branch padrão (*main* ou *develop*)
+   - **Root Folder**: `/`
+5. Clique em **Apply**.
+
+### 5. Gerenciando os Artefatos no Git
+1. Todos os pipelines e datasets criados serão salvos no repositório.
+2. Para visualizar no Azure DevOps:
+   - Acesse **Repositórios** no DevOps e veja os arquivos versionados.
+   - Cada alteração será armazenada com um commit.
+3. Para realizar mudanças:
+   - Faça edições no **Data Factory** e publique as alterações.
+   - No DevOps, crie **Pull Requests** para revisar e aprovar mudanças antes do merge.
+
+### 6. Boas Práticas de Governança
+- **Utilizar branches dedicadas**: `feature/nova_funcionalidade`, `hotfix/correção`.
+- **Implementar revisões de código** com Pull Requests.
+- **Manter padrões de nomenclatura** para pipelines e datasets.
+- **Automatizar deploys futuros** com CI/CD utilizando Azure Pipelines.
+
+## Conclusão
+A integração do Azure Data Factory com o Azure DevOps proporciona maior governança, versionamento e controle sobre os pipelines de dados. Essa estrutura possibilita padronizar ambientes de desenvolvimento e criar uma esteira eficiente para automação futura de deploys no Azure.
+
+---
+### 📌 Próximos Passos
+- Implementar uma esteira de **CI/CD** para automação do deploy.
+- Criar **testes automatizados** para validar pipelines antes da publicação.
+- Configurar **políticas de aprovação** para garantir qualidade nas mudanças.
+
+💡 **Gostou do projeto? Contribua e compartilhe!** 🚀
